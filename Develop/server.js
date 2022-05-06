@@ -5,14 +5,40 @@ const sequelize = require('./config/connection');
 require('dotenv').config();
 const bcrypt = require('bcrypt');
 const mysql = require('mysql2');
+const SequelizeStore = require('connect-session-sequelize')(session.Store);
+const path = require('path');
+const routes = require('./controllers/index');
 
 const app = express();
-const port = 3001;
+const PORT = 3001;
+
+const hbs = exphbs.create();
+
+const sess = {
+    secret: 'Secret',
+    cookie: {},
+    resave: false,
+    saveUninitialized: true,
+    store: new SequelizeStore({
+      db: sequelize
+    })
+  };
+  
+app.use(session(sess));
+
+app.engine('handlebars', hbs.engine);
+app.set('view engine', 'handlebars');
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', (req, res) => {
     res.send("Hello World!");
 });
 
-app.listen(port, () => {
-    console.log(`App listening to port ${port}`)
-});
+app.use(routes);
+
+sequelize.sync({ force: false }).then(() => {
+    app.listen(PORT, () => console.log('Now listening'));
+  });
