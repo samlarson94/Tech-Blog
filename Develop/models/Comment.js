@@ -13,13 +13,12 @@ Comment.init(
       autoIncrement: true,
     },
     comment_author: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       allowNull: false,
       references: {
           model: "user",
           key: "id",
       } 
-      //Need to reference post model as well?
     },
     date_created: {
       type: DataTypes.DATE,
