@@ -1,0 +1,23 @@
+[
+    {
+        "title": "Why I love RESTful API's",
+        "content": "I love them because they are easy to set up",
+        "date_created": "2022-01-17",
+        "author_name": "Sal",
+        "user_id": 1
+    },
+    {
+        "title": "Javascript - My Love Language of Choice",
+        "content": "Javascript is an excellent programming language to learn bc...",
+        "date_created": "2022-04-21",
+        "author_name": "Lernantino",
+        "user_id": 2
+    },
+    {
+        "title": "Regex for Dummies",
+        "content": "Regular expressions are important to learn bc...",
+        "date_created": "2022-05-09",
+        "author_name": "Aniko",
+        "user_id": 3
+    }
+]
