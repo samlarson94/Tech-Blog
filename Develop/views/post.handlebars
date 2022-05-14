@@ -1,4 +1,18 @@
-<h1>{{title}}</h1>
-{{content}}
-{{date_created}}
-{{author_name}}
+<div class="posts">
+    <div class="row justify-content-center">
+        <div class="col-lg-7" style="margin-top: 50px; border: 2px solid black;">
+            <div class="card">
+
+                <h1 class="post-title" style="text-align: center;">{{title}}</h1>
+                <div class="card-body" style="margin: 10px;">
+                    <h3 class="card-title">Posted by {{author_name}} on {{date_created}}</h3>
+                    <p>{{content}}</p>
+                    <ul class="list-group">
+                        <li class="list-group-item">Insert Comment Here</li>
+                        <li class="list-group-item">Insert Comment Here</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
