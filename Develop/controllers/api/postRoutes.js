@@ -3,13 +3,17 @@ const { Post } = require('../../models');
 const withAuth = require('../../utils/auth');
 
 //Create new Post - added withAuth to guard route
-router.post('/', async (req, res) => {
-    try {
-      console.log("Post route sent")
-      const newPost = await Post.create({
-        ...req.body //spread operator
-        // user_id: req.session.user_id,
-      });
+router.post('/post', withAuth, async (req, res) => {
+  console.log("post req sent")  
+  try {
+      
+      const newPost = await Post.create(req.body);
+      //   {
+      //   // ...req.body,
+      //   // user_id: req.session.user_id,
+      // }
+      // );
+  
       res.status(200).json(newPost);
     } catch (err) {
       res.status(400).json(err);
