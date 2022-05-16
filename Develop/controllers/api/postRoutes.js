@@ -1,10 +1,36 @@
 const router = require('express').Router();
-const { Post } = require('../../models');
+const { User, Post } = require('../../models');
 const withAuth = require('../../utils/auth');
 
+// Get all posts - endpoint /api/post
+
+router.get('/', async (req, res) => {
+  try {
+    // Get all posts and JOIN with user data
+    const postData = await Post.findAll({
+      include: [
+        {
+          model: User,
+          // attributes: ['author_name'],
+        },
+      ],
+    });
+
+    // Serialize data so the template can read it
+    const posts = postData.map((post) => post.get({ plain: true }));
+
+    // Pass serialized data and session flag into template
+    res.json(posts)
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
+
 //Create new Post - added withAuth to guard route
-router.post('/post', withAuth, async (req, res) => {
-  console.log("post req sent")  
+  //Endpoint api/post
+router.post('/', async (req, res) => {
+  console.log(req.body)  
   try {
       
       const newPost = await Post.create(req.body);
@@ -37,6 +63,7 @@ router.post('/post', withAuth, async (req, res) => {
   
       res.status(200).json(postData);
     } catch (err) {
+      console.log(err);
       res.status(500).json(err);
     }
   });
